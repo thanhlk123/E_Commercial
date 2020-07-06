@@ -9,7 +9,7 @@ const List = [
   {
     id: '1',
     title: 'TopWear',
-    item: ['T-Shirts', 'Casual Shirts', 'Formal Shirt', 'Formal Shirt']
+    item: ['T-Shirts', 'Casual Shirts', 'Formal Shirt']
   },
   {
     id: '2',
@@ -48,7 +48,9 @@ class ShopScreen extends Component {
       <SafeAreaView style={styles.container}>
         <ScrollView>
           <View style={[{ width: width },styles.center]}>
-            <TouchableOpacity style={[{ width: width*0.8 },styles.center]}>
+            <TouchableOpacity style={[{ width: width*0.8 },styles.center]}
+              onPress={()=>{this.props.navigation.navigate('Categories',{screen:'ListCategories'})}}
+            >
               <Image
                 source={require('../images/shops/shop1.jpg')}
                 style={styles.imgShop}
@@ -60,10 +62,10 @@ class ShopScreen extends Component {
           <View>
             {List.map(item => {
               return (
-                <Topic title={item.title}>
+                <Topic title={item.title} key={item.id}>
                   {item.item.map(data => {
                     return (
-                      <TouchableOpacity style={[styles.itemButton, styles.center]}>
+                      <TouchableOpacity style={[styles.itemButton, styles.center]} key={data}>
                         <Text style={styles.itemText}>{data}</Text>
                         <AntDesign name='right' size={10} />
                       </TouchableOpacity>

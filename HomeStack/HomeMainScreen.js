@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, TouchableOpacity, TextInput, FlatList, ScrollVi
 import { SimpleLineIcons } from '@expo/vector-icons'
 import topicsData from '../Datas/Topics';
 import TrendingsData from '../Datas/Trendings'
-import { NavigationEvents } from 'react-navigation';
 
 const { width, height } = Dimensions.get('screen')
 
@@ -27,7 +26,7 @@ const RenderItemTopic = (props) => {
 
 const RenderTopic = (props) => {
     return (
-        <View style={[styles.saleContainers, styles.shadowStyle, { width: width * 0.9, marginTop: 20 }, styles.centerItem]}>
+        <View style={[styles.saleContainers, styles.shadowStyle, { width: width -6, marginTop: 20 }, styles.centerItem]}>
             <FlatList
                 horizontal={true}
                 style={[styles.topic]}
@@ -75,12 +74,12 @@ const ItemTrending = (item) => {
 const RenderTrending = () => {
     return (
         <View style={[styles.renderTrendingContainer, styles.shadowStyle]}>
-            <View style={[styles.trendingTitle, styles.marginL]}>
+            <View style={[styles.trendingTitle, {padding:10}]}>
                 <Text style={{ color: 'grey' }}>Trending Now</Text>
             </View>
             <FlatList
                 data={TrendingsData}
-                style={[styles.renderTrendingFlatlist, styles.marginL]}
+                style={[styles.renderTrendingFlatlist]}
                 renderItem={({ item }) => <ItemTrending img={item.img} title={item.title} details={item.details} />}
                 keyExtractor={item => item.id}
                 horizontal={true}
@@ -93,14 +92,14 @@ const RenderTrending = () => {
 const RenderTodayPick = () => {
     return (
         <View style={[styles.todayPickContainer, styles.centerItem, styles.shadowStyle]}>
-            <View style={[{ width: "100%" }, styles.marginL]}>
+            <View style={[{ width: "100%", paddingVertical:10 }, styles.marginL]}>
                 <Text style={{ color: 'grey' }}>Today's Pick</Text>
             </View>
-            <TouchableOpacity style={{ height: "80%", width: '95%' }}>
+            <TouchableOpacity style={{ width: width*0.9, height:height*0.45, alignItems:'center' }}>
                 <Image
                     source={require('../images/today/today.jpg')}
                     resizeMode="cover"
-                    style={{ width: '100%', height: '100%' }}
+                    style={{ width: '100%', height:'100%'}}
                 />
             </TouchableOpacity>
         </View>
@@ -123,12 +122,12 @@ const QCItem = (item) => {
 const RenderQC = () => {
     return (
         <View style={[styles.QCcontainer, styles.shadowStyle]}>
-            <View style={[{ width: "100%" }, styles.marginL]}>
+            <View style={[{ width: "100%", padding:10 }]}>
                 <Text style={{ color: 'grey', fontSize: 13 }}>Since you've shown interest in Tshirts</Text>
             </View>
             <FlatList
                 data={TrendingsData}
-                style={{ width: width * 0.9 - 40, height: height * 0.5 }}
+                style={{ width: width * 0.95}}
                 renderItem={({ item }) => <QCItem img={item.img} title='' details='' />}
                 keyExtractor={item => item.id}
                 horizontal={true}
@@ -174,21 +173,22 @@ const ItemJustIn = (item) => {
 
 const RenderJustIn = () => {
     return (
-        <View style={[styles.justInContainer, styles.shadowStyle]}>
-            <View style={[{ paddingTop: 10 }, styles.marginL]}>
-                <Text style={{ color: 'grey' }}>Just In</Text>
-            </View>
-            <FlatList
-                data={TrendingsData}
-                style={[{ width: width * 0.9 - 30, height: height * 0.18, marginLeft: 15 }]}
-                renderItem={({ item }) => <ItemJustIn img={item.img} details={item.details} title={item.title} />}
-                keyExtractor={item => item.id}
-                horizontal={true}
-                showsHorizontalScrollIndicator={false}
-            />
-        </View>
-    )
-}
+              <View style={[styles.justInContainer, styles.shadowStyle]}>
+                <View style={[{ paddingVertical: 10, paddingHorizontal: 15, width: width, justifyContent: 'space-between', flexDirection: 'row' }, styles.marginL]}>
+                  <Text style={{color:'grey'}}>Just In</Text>
+                </View>
+                <FlatList
+                  data={TrendingsData}
+                  style={[{ width: width - 40 }]}
+                  renderItem={({ item }) => <ItemJustIn img={item.img} details={item.details} title={item.title} />}
+                  keyExtractor={item => item.id}
+                  horizontal={true}
+                  showsHorizontalScrollIndicator={false}
+                />
+              </View>
+            )
+          }
+
 
 export default class HomeMainScreen extends Component {
 
@@ -199,16 +199,11 @@ export default class HomeMainScreen extends Component {
             valueSearch: ''
         }
     }
-    static navigationOptions = ({ navigation }) => {
-        const { params = {} } = navigation.state;
-        let headerTitle = 'hi'
-        return { headerTitle }
-    }
     render() {
         return (
             <View style={{ flex: 1 }}>
                 <View style={{ height: 24, width: '100%', backgroundColor: '#76a6d6' }}></View>
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' }}>
+                <View style={{ flex: 1, alignItems: 'center', backgroundColor: 'white' }}>
                     {this.state.isSearching ?
                         <View style={[{ backgroundColor: 'white', width: '100%', height: 40, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }, styles.shadowStyle]}>
                             <TextInput
@@ -234,10 +229,10 @@ export default class HomeMainScreen extends Component {
                                 </TouchableOpacity>
                             </View>
                         </View>}
-                    <View style={{ flex: 1 }}>
+                    <View style={{ flex: 1, alignItems: 'center' }}>
                         <ScrollView
                             showsVerticalScrollIndicator={false}>
-                            <View style={{ justifyContent: 'center', alignItems: 'center', marginBottom: 30}}>
+                            <View style={{marginBottom: 30}}>
                                 <RenderTopic navigation={this.props.navigation} />
                                 <RenderSale />
                                 <RenderTrending />
@@ -257,14 +252,14 @@ const styles = StyleSheet.create({
     shadowStyle: {
         shadowColor: "#000",
         shadowOffset: {
-            width: 0,
-            height: 1,
+          width: 0,
+          height: 2,
         },
-        shadowOpacity: 0.18,
-        shadowRadius: 1.00,
-
-        elevation: 1,
-    },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+    
+        elevation: 5,
+      },
     topicItemImg: {
         width: 75,
         height: 75,
@@ -321,7 +316,7 @@ const styles = StyleSheet.create({
         marginRight: 10
     },
     topic: {
-        width: width * 0.9 - 30,
+        width: '95%',
         paddingTop: 10,
         paddingBottom: 10
     },
@@ -334,42 +329,61 @@ const styles = StyleSheet.create({
         width: '95%'
     },
     renderTrendingContainer: {
-        width: width * 0.9,
-        height: height * 0.35,
+        width: width - 6,
         marginTop: 10,
-        borderBottomColor: 'grey'
+        borderWidth: 0.5,
+        borderColor: "#d6d2d2",
+        borderRadius: 5,
+        backgroundColor: 'white',
+        paddingVertical: 10,
+        alignItems: 'center'
     },
     trendingTitle: {
         marginTop: 10,
         width: '100%'
     },
     renderTrendingFlatlist: {
-        width: width * 0.9 - 30,
+        width: '90%',
         height: height * 0.3
     },
     saleContainers: {
-        borderColor: 'grey',
-        marginTop: 10
+        width: width - 6,
+        marginTop: 10,
+        borderWidth: 0.5,
+        borderColor: "#d6d2d2",
+        borderRadius: 5,
+        backgroundColor: 'white',
+        paddingVertical: 10,
+        alignItems: 'center'
     },
     todayPickContainer: {
-        width: width * 0.9,
-        height: 0.5 * height,
-        marginTop: 20,
-        borderColor: 'grey'
+        width: width - 6,
+        marginTop: 10,
+        borderWidth: 0.5,
+        borderColor: "#d6d2d2",
+        borderRadius: 5,
+        backgroundColor: 'white',
+        alignItems: 'center',
+        paddingVertical:10
     },
     justInContainer: {
-        width: width * 0.9,
-        height: height * 0.25,
+        width: width - 6,
         marginTop: 10,
-        borderColor: 'grey'
+        borderWidth: 0.5,
+        borderColor: "#d6d2d2",
+        borderRadius: 5,
+        backgroundColor: 'white',
+        paddingVertical: 10,
+        alignItems: 'center'
     },
     QCcontainer: {
-        width: width * 0.9,
-        height: height * 0.45,
-        paddingTop: 20,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 20,
-        borderColor: 'grey'
+        width: width - 6,
+        marginTop: 10,
+        borderWidth: 0.5,
+        borderColor: "#d6d2d2",
+        borderRadius: 5,
+        backgroundColor: 'white',
+        paddingVertical: 10,
+        alignItems: 'center'
     }
 })

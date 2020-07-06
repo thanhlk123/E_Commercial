@@ -23,7 +23,9 @@ class HomeScreen extends Component {
   }
   render() {
     return (
-      <Stack.Navigator>
+      <Stack.Navigator
+      initialRouteName='Home'
+      >
         <Stack.Screen name="Home" component={HomeMainScreen} options={()=> this.constructor.HomeScreenOptions()}  />
         <Stack.Screen name="Shop" component={ShopScreen}  options={()=> this.constructor.ShopScreenOptions()}/>
       </Stack.Navigator>

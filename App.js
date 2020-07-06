@@ -30,7 +30,7 @@ function MyTabs() {
         }} name="Home" component={HomeScreen} />
       <Tab.Screen 
       options={{
-        tabBarLabel: 'Categoris',
+        tabBarLabel: 'Categories',
         tabBarIcon: ({ color}) => (
           <SimpleLineIcons name="grid" color={color} size={17} />
         ),
@@ -79,4 +79,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  textcolor: {
+    flex:1
+  }
 });
