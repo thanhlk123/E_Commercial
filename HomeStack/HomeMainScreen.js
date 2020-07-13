@@ -39,10 +39,12 @@ const RenderTopic = (props) => {
     )
 }
 
-const RenderSale = () => {
+const RenderSale = (props) => {
     return (
         <View style={[styles.saleContainers, styles.shadowStyle]}>
-            <TouchableOpacity style={[styles.saleButton, styles.centerItem]}>
+            <TouchableOpacity 
+            onPress={() => props.navigation.navigate('Sales')}
+            style={[styles.saleButton, styles.centerItem]}>
                 <Image
                     source={require('../images/sale/sale.jpg')}
                     resizeMode="cover"
@@ -234,7 +236,7 @@ export default class HomeMainScreen extends Component {
                             showsVerticalScrollIndicator={false}>
                             <View style={{marginBottom: 30}}>
                                 <RenderTopic navigation={this.props.navigation} />
-                                <RenderSale />
+                                <RenderSale navigation={this.props.navigation}/>
                                 <RenderTrending />
                                 <RenderTodayPick />
                                 <RenderJustIn />
