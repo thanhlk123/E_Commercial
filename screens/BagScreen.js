@@ -1,13 +1,61 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
+import React, { Component } from 'react';
+import { FontAwesome } from '@expo/vector-icons'
+import { TouchableOpacity, Text, StyleSheet } from 'react-native'
 
-export default function BagScreen() {
+import MyBagHomeScreen from '../MyBagStack/MyBagHomeScreen'
+import AdressScreen from '../MyBagStack/AddressScreen'
+import ConfirmScreen from '../MyBagStack/ConfirmScreen'
+import PaymentScreen from '../MyBagStack/PaymentScreen';
+
+const Stack = createStackNavigator();
+
+class CategoriesScreen extends Component {
+  constructor(props) {
+    super(props)
+  }
+  CategoriesMainOptions = () => {
+    let headerTitleAlign = 'center'
+    let headerTitle = 'Categories'
+    let headerStyle = { height: 70, backgroundColor: '#76a6d6', opacity: 1 }
+    let headerTintColor = 'white'
+    let headerRight = () => (<FontAwesome style={{ marginRight: 15 }} name='search' color='white' size={18} />)
+    return { headerTitleAlign, headerStyle, headerRight, headerTintColor, headerTitle }
+  }
+  ListCategoriesOptions = () => {
+    let headerTitleAlign = 'center'
+    let headerStyle = { height: 85, backgroundColor: '#76a6d6', opacity: 1 }
+    let headerTintColor = 'white'
+    let headerBackTitleVisible = true
+    let headerLeft = () => (
+      <TouchableOpacity
+        onPress={() => this.props.navigation.goBack()}
+      >
+        <Text style={styles.backButton}>Back</Text>
+      </TouchableOpacity>)
+    let headerRight = () => (<FontAwesome style={{ marginRight: 15 }} name='search' color='white' size={18} />)
+    return { headerTitleAlign, headerStyle, headerRight, headerTintColor, headerBackTitleVisible, headerLeft }
+  }
+  render() {
     return (
-      <View style={{ flex: 1}}>
-        <View style={{backgroundColor:'blue', height:24, widht:'100%'}}></View>
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <Text>Bag!</Text>
-        </View>
-      </View>
+      <Stack.Navigator
+        initialRouteName='MyBagHomeScreen'
+      >
+        <Stack.Screen name="MyBagHomeScreen" component={MyBagHomeScreen} options={() => this.CategoriesMainOptions()}/>
+        <Stack.Screen name="AddressScreen" component={AdressScreen} options={() => this.ListCategoriesOptions()} />
+        <Stack.Screen name="ConfirmScreen" component={ConfirmScreen} options={() => this.ListCategoriesOptions()}/>
+        <Stack.Screen name="PaymentSrceen" component={PaymentScreen} options={() => this.ListCategoriesOptions()} />
+      </Stack.Navigator>
     );
   }
+}
+
+const styles = StyleSheet.create({
+  backButton: {
+    paddingLeft: 10,
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 18
+  }
+})
+export default CategoriesScreen

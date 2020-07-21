@@ -15,11 +15,11 @@ const Tab = createBottomTabNavigator();
 function MyTabs() {
   return (
     <Tab.Navigator
-      tabBarOptions= {{
-      style: {
-        height: 45
-      }}
-    }
+    //   tabBarOptions= {{
+    //   style: {
+    //     height: 45
+    //   }}
+    // }
       >
       <Tab.Screen 
       options={{
