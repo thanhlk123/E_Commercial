@@ -87,7 +87,6 @@ const RenderItemChoosed = (props) => {
             }}
             size={20}
           >
-            {" "}
             {props.itemTotal}
           </Text>
           <TouchableOpacity
