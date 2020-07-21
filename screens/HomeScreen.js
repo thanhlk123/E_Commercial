@@ -4,6 +4,7 @@ import {FontAwesome} from '@expo/vector-icons'
 
 import HomeMainScreen from '../HomeStack/HomeMainScreen'
 import ShopScreen from '../HomeStack/ShopScreen'
+import SalesScreen from '../HomeStack/SalesScreen';
 
 const Stack = createStackNavigator();
 
@@ -21,12 +22,20 @@ class HomeScreen extends Component {
     let headerRight =()=> (<FontAwesome style={{marginRight:15}} name='search' color='white' size={18}  />)
     return {headerTitleAlign, headerStyle, headerRight, headerTintColor}
   }
+  static SalesScreenOptions = () => {
+    let headerTitleAlign = 'center'
+    let headerStyle ={height:70,backgroundColor: '#76a6d6', opacity:1}
+    let headerTintColor = 'white'
+    let headerRight =()=> (<FontAwesome style={{marginRight:15}} name='search' color='white' size={18}  />)
+    return {headerTitleAlign, headerStyle, headerRight, headerTintColor}
+  }
   render() {
     return (
       <Stack.Navigator
       initialRouteName='Home'
       >
         <Stack.Screen name="Home" component={HomeMainScreen} options={()=> this.constructor.HomeScreenOptions()}  />
+        <Stack.Screen name="Sales" component={SalesScreen} options={()=> this.constructor.SalesScreenOptions()}  />
         <Stack.Screen name="Shop" component={ShopScreen}  options={()=> this.constructor.ShopScreenOptions()}/>
       </Stack.Navigator>
     );
