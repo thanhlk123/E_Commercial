@@ -1,13 +1,27 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
+import React, { Component } from 'react';
+import {FontAwesome} from '@expo/vector-icons'
 
-export default function NotificationsScreen() {
+import NotifyScreenMain from '../NotifyScreenStack/NotifyScreenMain'
+
+const Stack = createStackNavigator();
+
+export default class NotificationsScreen extends Component {
+  static NotifyScreenOptions = ()=> {
+    let headerShown  =true
+    let headerTitle = "Thông báo"
+    let headerTitleAlign = 'center'
+    let headerTintColor = 'white'
+    let headerStyle = {  backgroundColor: '#3b5f8a', opacity: 1 }
+  return {headerShown, headerTitleAlign, headerTitle, headerStyle, headerTintColor}
+}
+  render() {
     return (
-      <View style={{ flex: 1}}>
-        <View style={{backgroundColor:'blue', height:24, widht:'100%'}}></View>
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <Text>Notifications!</Text>
-        </View>
-      </View>
+      <Stack.Navigator
+      initialRouteName='NotifyScreenMain'
+      >
+        <Stack.Screen name="NotifyScreenMain" component={NotifyScreenMain} options={()=> this.constructor.NotifyScreenOptions()}  />
+      </Stack.Navigator>
     );
   }
+}

@@ -204,7 +204,6 @@ export default class HomeMainScreen extends Component {
     render() {
         return (
             <View style={{ flex: 1 }}>
-                <View style={{ height: 24, width: '100%', backgroundColor: '#76a6d6' }}></View>
                 <View style={{ flex: 1, alignItems: 'center', backgroundColor: 'white' }}>
                     {this.state.isSearching ?
                         <View style={[{ backgroundColor: 'white', width: '100%', height: 40, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }, styles.shadowStyle]}>
