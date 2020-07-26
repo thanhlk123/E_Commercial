@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity } from 'react-native';
 import * as Google from 'expo-google-app-auth';
+import { Entypo } from '@expo/vector-icons';
 
 const { width, height } = Dimensions.get('screen')
 
@@ -8,7 +9,7 @@ export default class LoginScreen extends React.Component {
 
   _handleGoogleLogin = async () => {
     try {
-      const { type, user,idToken, accessToken } = await Google.logInAsync({
+      const { type, user, idToken, accessToken } = await Google.logInAsync({
         androidStandaloneAppClientId: '208098970743-e8442r8frk3vhbcjja5jg4fqa0ivn326.apps.googleusercontent.com',
         iosStandaloneAppClientId: '<IOS_CLIENT_ID>',
         androidClientId: '603386649315-9rbv8vmv2vvftetfbvlrbufcps1fajqf.apps.googleusercontent.com',
@@ -18,6 +19,7 @@ export default class LoginScreen extends React.Component {
       switch (type) {
         case 'success': {
           //////////////////////////////////
+          console.log(uset)
           console.log('success')
           break;
         }
@@ -49,29 +51,33 @@ export default class LoginScreen extends React.Component {
             resizeMode='contain'
           />
           <View style={{ height: '50%', alignItems: 'center' }}>
-            <Text style={{ padding: 10, color: 'grey', fontSize: 15 }}>Loved Our Collection? Login with</Text>
             <TouchableOpacity
               onPress={this._handleGoogleLogin}
             >
-              <View style={[{ height: 40, flexDirection: 'row', backgroundColor: '#1325ab', padding: 5, borderRadius: 5 }, styles.centerItem, styles.shadow]}>
-                <View style={[{ width: 33, height: 33, backgroundColor: 'white' }, styles.centerItem]}>
+              <View style={[{ width: 300, height: 40, flexDirection: 'row', backgroundColor: '#1325ab', padding: 5, borderRadius: 5, margin: 5, alignItems: "center" }, styles.shadow]}>
+                <View style={[{ width: 33, height: 33, backgroundColor: 'white', marginRight: 10  }, styles.centerItem]}>
                   <Image source={require('../images/loginPage/loginGG.png')}
                     style={{ width: 20, height: 20 }}
                     resizeMode='contain' />
                 </View>
-                <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold' }}>  Sign in with Google</Text>
+                <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold' }}>Sign in with Google</Text>
               </View>
             </TouchableOpacity>
-            <Text style={{ padding: 10, color: 'grey', fontSize: 15 }}> -or use email address- </Text>
-            <View style={{ flexDirection: 'row', marginTop:20 }}>
-              <TouchableOpacity>
-                <View style={[styles.loginButton, styles.borderRight, styles.centerItem]}>
-                  <Text style={styles.loginText}>LOGIN</Text>
+            <TouchableOpacity
+            >
+              <View style={[{ width: 300, height: 40, flexDirection: 'row', backgroundColor: '#48cfad', padding: 5, borderRadius: 5, margin: 5, alignItems: "center" }, styles.shadow]}>
+                <View style={[{ width: 33, height: 33, backgroundColor: 'white', marginRight: 10 }, styles.centerItem]}>
+                  <Image source={require('../images/loginPage/phonenumber.png')}
+                    style={{ width: 20, height: 20 }}
+                    resizeMode='contain' />
                 </View>
-              </TouchableOpacity>
+                <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold' }}>Sign in with phone number</Text>
+              </View>
+            </TouchableOpacity>
+            <View style={{ flexDirection: 'row', width:300, justifyContent:"flex-end" }}>
               <TouchableOpacity>
-                <View style={[styles.loginButton, styles.centerItem]}>
-                  <Text style={styles.loginText}>SIGNUP</Text>
+                <View style={[styles.centerItem]}>
+                  <Text style={styles.loginText}>Reset or create account</Text>
                 </View>
               </TouchableOpacity>
             </View>
@@ -117,8 +123,7 @@ const styles = StyleSheet.create({
 
     elevation: 5,
   },
-  loginText:{
-    color:'#1325ab',
-    fontWeight:'bold'
+  loginText: {
+    color: 'gray',
   }
 });

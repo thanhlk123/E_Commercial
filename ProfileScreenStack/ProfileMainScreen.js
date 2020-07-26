@@ -47,7 +47,8 @@ export default class ProfileMainScreen extends Component {
                     Login
                   </Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={{ padding: 5 }}>
+                <TouchableOpacity style={{ padding: 5 }}
+                onPress = {()=>this.props.navigation.navigate('RegisterScreen')}>
                   <Text style={{ fontWeight: 'bold', fontSize: 15 }}>
                     Register
                   </Text>
