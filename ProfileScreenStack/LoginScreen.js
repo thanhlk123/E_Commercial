@@ -51,9 +51,9 @@ export default class LoginScreen extends React.Component {
             resizeMode='contain'
           />
           <View style={{ height: '50%', alignItems: 'center' }}>
+
             <TouchableOpacity
-              onPress={this._handleGoogleLogin}
-            >
+              onPress={this._handleGoogleLogin}>
               <View style={[{ width: 300, height: 40, flexDirection: 'row', backgroundColor: '#1325ab', padding: 5, borderRadius: 5, margin: 5, alignItems: "center" }, styles.shadow]}>
                 <View style={[{ width: 33, height: 33, backgroundColor: 'white', marginRight: 10  }, styles.centerItem]}>
                   <Image source={require('../images/loginPage/loginGG.png')}
@@ -64,7 +64,7 @@ export default class LoginScreen extends React.Component {
               </View>
             </TouchableOpacity>
             <TouchableOpacity
-            >
+            onPress={()=>this.props.navigation.navigate('RegisterScreen')}>
               <View style={[{ width: 300, height: 40, flexDirection: 'row', backgroundColor: '#48cfad', padding: 5, borderRadius: 5, margin: 5, alignItems: "center" }, styles.shadow]}>
                 <View style={[{ width: 33, height: 33, backgroundColor: 'white', marginRight: 10 }, styles.centerItem]}>
                   <Image source={require('../images/loginPage/phonenumber.png')}

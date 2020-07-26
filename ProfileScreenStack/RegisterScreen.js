@@ -38,11 +38,11 @@ export default class RegisterScreen extends Component {
     super(props);
 
     this.state = {
-      email: '',
+      phoneNumber: '',
       password: '',
       selectedCategory: 0,
       isLoading: false,
-      isEmailValid: true,
+      isPhoneNumberValid: true,
       isPasswordValid: true,
       isConfirmationValid: true,
     };
@@ -60,35 +60,35 @@ export default class RegisterScreen extends Component {
     });
   }
 
-  validateEmail(email) {
-    var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  validatePhoneNumber(phoneNumber) {
+    var re = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
 
-    return re.test(email);
+    return re.test(phoneNumber);
   }
 
   login() {
-    const { email, password } = this.state;
+    const { phoneNumber, password } = this.state;
     this.setState({ isLoading: true });
     // Simulate an API call
     setTimeout(() => {
       LayoutAnimation.easeInEaseOut();
       this.setState({
         isLoading: false,
-        isEmailValid: this.validateEmail(email) || this.emailInput.shake(),
+        isPhoneNumberValid: this.validatePhoneNumber(phoneNumber) || this.phoneNumberInput.shake(),
         isPasswordValid: password.length >= 8 || this.passwordInput.shake(),
       });
     }, 1500);
   }
 
   signUp() {
-    const { email, password, passwordConfirmation } = this.state;
+    const { phoneNumber, password, passwordConfirmation } = this.state;
     this.setState({ isLoading: true });
     // Simulate an API call
     setTimeout(() => {
       LayoutAnimation.easeInEaseOut();
       this.setState({
         isLoading: false,
-        isEmailValid: this.validateEmail(email) || this.emailInput.shake(),
+        isPhoneNumberValid: this.validatePhoneNumber(phoneNumber) || this.phoneNumberInput.shake(),
         isPasswordValid: password.length >= 8 || this.passwordInput.shake(),
         isConfirmationValid:
           password === passwordConfirmation || this.confirmationInput.shake(),
@@ -100,10 +100,10 @@ export default class RegisterScreen extends Component {
     const {
       selectedCategory,
       isLoading,
-      isEmailValid,
+      isPhoneNumberValid,
       isPasswordValid,
       isConfirmationValid,
-      email,
+      phoneNumber,
       password,
       passwordConfirmation,
     } = this.state;
@@ -112,7 +112,7 @@ export default class RegisterScreen extends Component {
 
     return (
       <View style={styles.container}>
-        <ImageBackground source={BG_IMAGE} style={styles.bgImage}>
+        <View  style={styles.bgImage}>
           <View>
             <KeyboardAvoidingView
               contentContainerStyle={styles.loginContainer}
@@ -160,30 +160,30 @@ export default class RegisterScreen extends Component {
                 <Input
                   leftIcon={
                     <Icon
-                      name="envelope-o"
-                      type="font-awesome"
+                      name="phone-iphone"
+                      type="MaterialIcons"
                       color="rgba(0, 0, 0, 0.38)"
                       size={25}
                       style={{ backgroundColor: 'transparent' }}
                     />
                   }
-                  value={email}
+                  value={phoneNumber}
                   keyboardAppearance="light"
                   autoFocus={false}
                   autoCapitalize="none"
                   autoCorrect={false}
-                  keyboardType="email-address"
+                  keyboardType="number"
                   returnKeyType="next"
                   inputStyle={{ marginLeft: 10 }}
                   placeholder={'Số điện thoại'}
                   containerStyle={{
                     borderBottomColor: 'rgba(0, 0, 0, 0.38)',
                   }}
-                  ref={input => (this.emailInput = input)}
+                  ref={input => (this.phoneNumberInput = input)}
                   onSubmitEditing={() => this.passwordInput.focus()}
-                  onChangeText={email => this.setState({ email })}
+                  onChangeText={phoneNumber => this.setState({ phoneNumber })}
                   errorMessage={
-                    isEmailValid ? null : 'Please enter a valid email address'
+                    isPhoneNumberValid ? null : 'Please enter a valid phone number address'
                   }
                 />
                 <Input
@@ -269,17 +269,8 @@ export default class RegisterScreen extends Component {
                 />
               </View>
             </KeyboardAvoidingView>
-            <View style={styles.helpContainer}>
-              <Button
-                title={'Need help ?'}
-                titleStyle={{ color: 'white' }}
-                buttonStyle={{ backgroundColor: 'transparent' }}
-                underlayColor="transparent"
-                onPress={() => console.log('Account created')}
-              />
-            </View>
           </View>
-        </ImageBackground>
+        </View>
       </View>
     );
   }
@@ -326,7 +317,7 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     height: 150,
-    backgroundColor: 'transparent',
+    backgroundColor: '#f2f2f2',
     justifyContent: 'center',
   },
   formContainer: {
@@ -353,7 +344,7 @@ const styles = StyleSheet.create({
   },
   categoryText: {
     textAlign: 'center',
-    color: 'white',
+    color: 'black',
     fontSize: 24,
     backgroundColor: 'transparent',
     opacity: 0.54,
@@ -362,7 +353,7 @@ const styles = StyleSheet.create({
     opacity: 1,
   },
   titleText: {
-    color: 'white',
+    color: 'black',
     fontSize: 30,
   },
   helpContainer: {

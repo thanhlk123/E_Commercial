@@ -1,6 +1,6 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React, { Component } from 'react';
-import { FontAwesome, AntDesign } from '@expo/vector-icons'
+import { FontAwesome, AntDesign, Ionicons } from '@expo/vector-icons'
 import { TouchableOpacity, Text, StyleSheet } from 'react-native'
 
 import CategoriesMainScreen from '../CategoriesStack/CategoriesMainScreen'
@@ -29,8 +29,9 @@ class CategoriesScreen extends Component {
       <TouchableOpacity
         onPress={() => this.props.navigation.goBack()}
       >
-        <AntDesign style={{paddingLeft:10}} name="back" size={24} color="white" />
+        <Ionicons style={{paddingLeft:20}} name="md-arrow-back" size={24} color="white" />
       </TouchableOpacity>)
+      
     let headerRight = () => (<FontAwesome style={{ marginRight: 15 }} name='search' color='white' size={18} />)
     return { headerTitleAlign, headerStyle, headerRight, headerTintColor, headerBackTitleVisible, headerLeft}
   }
