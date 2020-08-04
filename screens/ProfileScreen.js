@@ -19,7 +19,7 @@ class ProfileScreen extends Component {
   }
   static LoginScreenScreenOptions = () => {
     let headerTitleAlign = 'center'
-    let headerStyle ={height:70,backgroundColor: '#3b5f8a', opacity:1}
+    let headerStyle ={backgroundColor: '#3b5f8a', opacity:1}
     let headerTintColor = 'white'
     let headerTitle = "Đăng nhập"
     let headerRight =()=> (<FontAwesome style={{marginRight:15}} name='search' color='white' size={18}  />)
@@ -27,7 +27,7 @@ class ProfileScreen extends Component {
   }
   static RegisterScreenScreenOptions = () => {
     let headerTitleAlign = 'center'
-    let headerStyle ={height:70,backgroundColor: '#3b5f8a', opacity:1}
+    let headerStyle ={backgroundColor: '#3b5f8a', opacity:1}
     let headerTintColor = 'white'
     let headerTitle = "Đăng ký tài khoản"
     let headerRight =()=> (<FontAwesome style={{marginRight:15}} name='search' color='white' size={18}  />)

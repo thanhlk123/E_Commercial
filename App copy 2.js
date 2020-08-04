@@ -1,373 +1,541 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import {
-  StyleSheet,
-  View,
-  Text,
-  ImageBackground,
-  Dimensions,
-  LayoutAnimation,
-  UIManager,
-  KeyboardAvoidingView,
-} from 'react-native';
-import { Input, Button, Icon } from 'react-native-elements';
+import { StyleSheet, Text, View, TouchableOpacity, Image, SafeAreaView, ScrollView, TextInput } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { FontAwesome, FontAwesome5, AntDesign, Entypo } from '@expo/vector-icons';
 
-const SCREEN_WIDTH = Dimensions.get('window').width;
-const SCREEN_HEIGHT = Dimensions.get('window').height;
 
-const BG_IMAGE = require('./images/login.jpg');
-
-// Enable LayoutAnimation on Android
-UIManager.setLayoutAnimationEnabledExperimental &&
-  UIManager.setLayoutAnimationEnabledExperimental(true);
-
-const TabSelector = ({ selected }) => {
-  return (
-    <View style={styles.selectorContainer}>
-      <View style={selected && styles.selected} />
-    </View>
-  );
-};
-
-TabSelector.propTypes = {
-  selected: PropTypes.bool.isRequired,
-};
-
-export default class LoginScreen2 extends Component {
+export default class App extends Component {
   constructor(props) {
-    super(props);
-
-    this.state = {
-      email: '',
-      password: '',
-      selectedCategory: 0,
-      isLoading: false,
-      isEmailValid: true,
-      isPasswordValid: true,
-      isConfirmationValid: true,
-    };
-
-    this.selectCategory = this.selectCategory.bind(this);
-    this.login = this.login.bind(this);
-    this.signUp = this.signUp.bind(this);
-  }
-
-  selectCategory(selectedCategory) {
-    LayoutAnimation.easeInEaseOut();
-    this.setState({
-      selectedCategory,
-      isLoading: false,
-    });
-  }
-
-  validateEmail(email) {
-    var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-    return re.test(email);
-  }
-
-  login() {
-    const { email, password } = this.state;
-    this.setState({ isLoading: true });
-    // Simulate an API call
-    setTimeout(() => {
-      LayoutAnimation.easeInEaseOut();
-      this.setState({
-        isLoading: false,
-        isEmailValid: this.validateEmail(email) || this.emailInput.shake(),
-        isPasswordValid: password.length >= 8 || this.passwordInput.shake(),
-      });
-    }, 1500);
-  }
-
-  signUp() {
-    const { email, password, passwordConfirmation } = this.state;
-    this.setState({ isLoading: true });
-    // Simulate an API call
-    setTimeout(() => {
-      LayoutAnimation.easeInEaseOut();
-      this.setState({
-        isLoading: false,
-        isEmailValid: this.validateEmail(email) || this.emailInput.shake(),
-        isPasswordValid: password.length >= 8 || this.passwordInput.shake(),
-        isConfirmationValid:
-          password === passwordConfirmation || this.confirmationInput.shake(),
-      });
-    }, 1500);
+    super(props)
+    this.state = {}
   }
 
   render() {
-    const {
-      selectedCategory,
-      isLoading,
-      isEmailValid,
-      isPasswordValid,
-      isConfirmationValid,
-      email,
-      password,
-      passwordConfirmation,
-    } = this.state;
-    const isLoginPage = selectedCategory === 0;
-    const isSignUpPage = selectedCategory === 1;
-
     return (
-      <View style={styles.container}>
-        <ImageBackground source={BG_IMAGE} style={styles.bgImage}>
-          <View>
-            <KeyboardAvoidingView
-              contentContainerStyle={styles.loginContainer}
-              behavior="position"
-            >
-              <View style={styles.titleContainer}>
+      <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: "center" }}>
+        <ScrollView showsVerticalScrollIndicator={false}
+          style={{ width: "90%" }}>
+          <TouchableOpacity>
+            <Image style={{ width: "100%", height: 250 }}
+              resizeMode="contain"
+              source={require('./images/ProductsDetail/bag-1.jpg')} />
+          </TouchableOpacity>
+
+          <View style={{ width: "100%" }}>
+            <ScrollView
+              horizontal={true}
+              style={{ width: "100%" }}
+              showsHorizontalScrollIndicator={false}>
+
+              <TouchableOpacity style={{ margin: 5 }}>
+                <Image style={{ width: 100, height: 128 }}
+                  resizeMode="contain"
+                  source={require('./images/ProductsDetail/bag-1.jpg')} />
+              </TouchableOpacity>
+
+              <TouchableOpacity style={{ margin: 5 }}>
+                <Image style={{ width: 100, height: 128 }}
+                  resizeMode="contain"
+                  source={require('./images/ProductsDetail/bag-2.jpg')} />
+              </TouchableOpacity>
+
+              <TouchableOpacity style={{ margin: 5 }}>
+                <Image style={{ width: 100, height: 128 }}
+                  resizeMode="contain"
+                  source={require('./images/ProductsDetail/bag-3.jpg')} />
+              </TouchableOpacity>
+
+              <TouchableOpacity style={{ margin: 5 }}>
+                <Image style={{ width: 100, height: 128 }}
+                  resizeMode="contain"
+                  source={require('./images/ProductsDetail/bag-4.jpg')} />
+              </TouchableOpacity>
+            </ScrollView>
+          </View>
+
+          <View style={{ marginBottom: 10 }}>
+            <Text style={{ fontWeight: "400", fontSize: 28 }}>Backpack double strap</Text>
+          </View>
+
+
+          <View style={{ flexDirection: 'row', alignItems: "center", marginBottom: 10 }}>
+            <FontAwesome name="star" size={16} color="#FFAA43" />
+            <FontAwesome name="star" size={16} color="#FFAA43" />
+            <FontAwesome name="star" size={16} color="#FFAA43" />
+            <FontAwesome name="star-half-empty" size={16} color="#FFAA43" />
+            <FontAwesome name="star-o" size={16} color="#FFAA43" />
+            <Text style={{ paddingHorizontal: 5, borderRightWidth: 1, borderRightColor: 'gray', fontSize: 16, color: "gray" }}>4.9</Text>
+            <Text style={{ paddingHorizontal: 5, paddingBottom: 2, fontSize: 16, color: "gray" }}>Đã bán 2.4k</Text>
+          </View>
+
+          <View style={{ flexDirection: 'row', marginBottom: 10 }}>
+            <Text style={{ color: "red", fontSize: 20, fontWeight: "400", paddingRight: 10 }}> 418.000₫ ~ 500.000₫</Text>
+            <Text>
+              (
+              <Text style={{ textDecorationLine: 'line-through', color: 'gray', fontSize: 20 }}>
+                618.000₫
+              </Text>
+              )
+            </Text>
+          </View>
+
+          <View style={{ marginBottom: 10 }}>
+            <Text style={{ color: "gray" }}>
+              Lacinia porta aenean conubia a ut integer ultrices cras a laoreet erat iaculis mollis cursus ante consectetur consectetur qisque vel rutrum elementum dis a class tempus a.Adipiscing a condimentum condimentum.
+            </Text>
+          </View>
+          {/* Kich thuoc */}
+          <View style={{ flexDirection: 'row', alignItems: "center" }}>
+            <Text style={{ fontSize: 20, fontWeight: '400', paddingBottom: 3 }}>Size:</Text>
+            <TouchableOpacity>
+              <View style={{ marginHorizontal: 5, width: 30, height: 30, borderRadius: 15, borderWidth: 1, justifyContent: "center", alignItems: "center" }}>
+                <Text>S</Text>
+              </View>
+              <Text></Text>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <View style={{ marginHorizontal: 5, width: 30, height: 30, borderRadius: 15, borderWidth: 1, justifyContent: "center", alignItems: "center" }}>
+                <Text>M</Text>
+              </View>
+              <Text></Text>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <View style={{ marginHorizontal: 5, width: 30, height: 30, borderRadius: 15, borderWidth: 1, justifyContent: "center", alignItems: "center" }}>
+                <Text>L</Text>
+              </View>
+              <Text></Text>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <View style={{ marginHorizontal: 5, width: 30, height: 30, borderRadius: 15, borderWidth: 1, justifyContent: "center", alignItems: "center" }}>
+                <Text>XL</Text>
+              </View>
+              <Text></Text>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <View style={{ marginHorizontal: 5, width: 30, height: 30, borderRadius: 15, borderWidth: 1, justifyContent: "center", alignItems: "center" }}>
+                <Text>XXL</Text>
+              </View>
+              <Text></Text>
+            </TouchableOpacity>
+          </View>
+          {/* 
+          <View style={{ flexDirection: 'row' }}>
+            <TouchableOpacity>
+              <View style={{ backgroundColor: "gray", width: 20, heigh: 50 }}>
+                <Text>-</Text>
+              </View>
+            </TouchableOpacity>
+            <TextInput
+              style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+              onChangeText={text => onChangeText(this.setState({inputText:text}))}
+              value={this.state.inputText} />
+            <TouchableOpacity>
+              <View style={{ backgroundColor: "gray", width: 20, heigh: 50 }}>
+                <Text>+</Text>
+              </View>
+            </TouchableOpacity>
+          </View> */}
+
+          {/* Danh gia san pham */}
+          <View >
+            <View style={{ flexDirection: 'row', paddingVertical: 10, borderBottomColor: 'gray', borderBottomWidth: 0.5, alignItems: "center" }}>
+              <View style={{ flex: 1 }}>
+                <Text style={{ fontWeight: '400', fontSize: 16, paddingBottom: 5 }}>ĐÁNH GIÁ SẢN PHẨM</Text>
                 <View style={{ flexDirection: 'row' }}>
-                  <Text style={styles.titleText}>STRAP</Text>
-                </View>
-                <View style={{ marginTop: -10, marginLeft: 10 }}>
-                  <Text style={styles.titleText}>ECOMMERCE</Text>
+                  <FontAwesome name="star" size={16} color="#FFAA43" />
+                  <FontAwesome name="star" size={16} color="#FFAA43" />
+                  <FontAwesome name="star" size={16} color="#FFAA43" />
+                  <FontAwesome name="star-half-empty" size={16} color="#FFAA43" />
+                  <FontAwesome name="star-o" size={16} color="#FFAA43" />
+                  <Text style={{ paddingRight: 5 }}>4.9/5</Text>
+                  <Text>(235 đánh giá)</Text>
                 </View>
               </View>
+              <View style={{ width: 100 }}>
+                <Text>Xem tất cả <AntDesign name="right" size={16} color="black" /></Text>
+              </View>
+            </View>
+
+            {/* cmt cua tung ng */}
+            <View style={{ paddingVertical: 10, borderBottomWidth: 0.5, borderBottomColor: "gray" }}>
+              <Text style={{ fontSize: 16 }}>
+                Hình ảnh từ người mua
+              </Text>
               <View style={{ flexDirection: 'row' }}>
-                <Button
-                  disabled={isLoading}
-                  type="clear"
-                  activeOpacity={0.7}
-                  onPress={() => this.selectCategory(0)}
-                  containerStyle={{ flex: 1 }}
-                  titleStyle={[
-                    styles.categoryText,
-                    isLoginPage && styles.selectedCategoryText,
-                  ]}
-                  title={'Login'}
-                />
-                <Button
-                  disabled={isLoading}
-                  type="clear"
-                  activeOpacity={0.7}
-                  onPress={() => this.selectCategory(1)}
-                  containerStyle={{ flex: 1 }}
-                  titleStyle={[
-                    styles.categoryText,
-                    isSignUpPage && styles.selectedCategoryText,
-                  ]}
-                  title={'Sign up'}
-                />
+                <TouchableOpacity style={{ margin: 5, flex: 1 }}>
+                  <Image style={{ width: 75, height: 96 }}
+                    resizeMode="contain"
+                    source={require('./images/ProductsDetail/bag-1.jpg')} />
+                </TouchableOpacity>
+                <TouchableOpacity style={{ margin: 5, flex: 1 }}>
+                  <Image style={{ width: 75, height: 96 }}
+                    resizeMode="contain"
+                    source={require('./images/ProductsDetail/bag-2.jpg')} />
+                </TouchableOpacity>
+                <TouchableOpacity style={{ margin: 5, flex: 1 }}>
+                  <Image style={{ width: 75, height: 96 }}
+                    resizeMode="contain"
+                    source={require('./images/ProductsDetail/bag-3.jpg')} />
+                </TouchableOpacity>
+                <TouchableOpacity style={{ margin: 5, flex: 1 }}>
+                  <Image style={{ width: 75, height: 96 }}
+                    resizeMode="contain"
+                    source={require('./images/ProductsDetail/bag-4.jpg')} />
+
+                  <View style={{ position: "absolute", top: 0, width: 75, height: 96, opacity: 0.5, backgroundColor: "gray", justifyContent: "center", alignItems: "center" }}>
+                    <Text style={{ color: 'white', fontSize: 16 }}>+44</Text>
+                  </View>
+                </TouchableOpacity>
               </View>
-              <View style={styles.rowSelector}>
-                <TabSelector selected={isLoginPage} />
-                <TabSelector selected={isSignUpPage} />
+            </View>
+
+
+            {/* Item tung comment */}
+            <View style={{ flexDirection: 'row', paddingVertical: 5, borderBottomColor: "gray", borderBottomWidth: 0.5 }}>
+              <View style={{ marginHorizontal: 10, marginVertical: 5, width: 20, height: 20, borderRadius: 10, backgroundColor: "gray", justifyContent: 'center', alignItems: 'center' }}>
+                <FontAwesome5 name="user-alt" size={10} color="#2f435c" />
               </View>
-              <View style={styles.formContainer}>
-                <Input
-                  leftIcon={
-                    <Icon
-                      name="envelope-o"
-                      type="font-awesome"
-                      color="rgba(0, 0, 0, 0.38)"
-                      size={25}
-                      style={{ backgroundColor: 'transparent' }}
-                    />
-                  }
-                  value={email}
-                  keyboardAppearance="light"
-                  autoFocus={false}
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                  keyboardType="email-address"
-                  returnKeyType="next"
-                  inputStyle={{ marginLeft: 10 }}
-                  placeholder={'Email'}
-                  containerStyle={{
-                    borderBottomColor: 'rgba(0, 0, 0, 0.38)',
-                  }}
-                  ref={input => (this.emailInput = input)}
-                  onSubmitEditing={() => this.passwordInput.focus()}
-                  onChangeText={email => this.setState({ email })}
-                  errorMessage={
-                    isEmailValid ? null : 'Please enter a valid email address'
-                  }
-                />
-                <Input
-                  leftIcon={
-                    <Icon
-                      name="lock"
-                      type="simple-line-icon"
-                      color="rgba(0, 0, 0, 0.38)"
-                      size={25}
-                      style={{ backgroundColor: 'transparent' }}
-                    />
-                  }
-                  value={password}
-                  keyboardAppearance="light"
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                  secureTextEntry={true}
-                  returnKeyType={isSignUpPage ? 'next' : 'done'}
-                  blurOnSubmit={true}
-                  containerStyle={{
-                    marginTop: 16,
-                    borderBottomColor: 'rgba(0, 0, 0, 0.38)',
-                  }}
-                  inputStyle={{ marginLeft: 10 }}
-                  placeholder={'Password'}
-                  ref={input => (this.passwordInput = input)}
-                  onSubmitEditing={() =>
-                    isSignUpPage ? this.confirmationInput.focus() : this.login()
-                  }
-                  onChangeText={password => this.setState({ password })}
-                  errorMessage={
-                    isPasswordValid
-                      ? null
-                      : 'Please enter at least 8 characters'
-                  }
-                />
-                {isSignUpPage && (
-                  <Input
-                    icon={
-                      <Icon
-                        name="lock"
-                        type="simple-line-icon"
-                        color="rgba(0, 0, 0, 0.38)"
-                        size={25}
-                        style={{ backgroundColor: 'transparent' }}
-                      />
-                    }
-                    value={passwordConfirmation}
-                    secureTextEntry={true}
-                    keyboardAppearance="light"
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                    keyboardType="default"
-                    returnKeyType={'done'}
-                    blurOnSubmit={true}
-                    containerStyle={{
-                      marginTop: 16,
-                      borderBottomColor: 'rgba(0, 0, 0, 0.38)',
-                    }}
-                    inputStyle={{ marginLeft: 10 }}
-                    placeholder={'Confirm password'}
-                    ref={input => (this.confirmationInput = input)}
-                    onSubmitEditing={this.signUp}
-                    onChangeText={passwordConfirmation =>
-                      this.setState({ passwordConfirmation })
-                    }
-                    errorMessage={
-                      isConfirmationValid
-                        ? null
-                        : 'Please enter the same password'
-                    }
-                  />
-                )}
-                <Button
-                  buttonStyle={styles.loginButton}
-                  containerStyle={{ marginTop: 32, flex: 0 }}
-                  activeOpacity={0.8}
-                  title={isLoginPage ? 'LOGIN' : 'SIGN UP'}
-                  onPress={isLoginPage ? this.login : this.signUp}
-                  titleStyle={styles.loginTextButton}
-                  loading={isLoading}
-                  disabled={isLoading}
-                />
+              <View style={{ flex: 1, margin: 5 }}>
+                <View style={{ flexDirection: 'row', flex: 1, justifyContent: 'space-between' }}>
+                  <View style={{ alignItems: 'center' }}>
+                    <Text style={{ color: "gray" }}>User</Text>
+                  </View>
+                  <View style={{ flexDirection: "row", alignSelf: 'flex-end', width: 40, justifyContent: "space-between" }}>
+                    <AntDesign name="like1" size={16} color="gray" />
+                    <Entypo name="dots-three-horizontal" size={16} color="gray" />
+                  </View>
+                </View>
+                <View style={{ flexDirection: 'row', margin: 5 }}>
+                  <FontAwesome name="star" size={10} color="#FFAA43" />
+                  <FontAwesome name="star" size={10} color="#FFAA43" />
+                  <FontAwesome name="star" size={10} color="#FFAA43" />
+                  <FontAwesome name="star-half-empty" size={10} color="#FFAA43" />
+                  <FontAwesome name="star-o" size={10} color="#FFAA43" />
+                </View>
+                <View style={{ margin: 5 }}>
+                  <Text>
+                    E chào cô. Do một số lý do gì đó mà tài khoản của e không được quét nộp tiền học. Cô cho e hỏi giờ e làm sao ạ. Vì mai e thi mà kiểm tra thấy tài khoản vẫn còn tiền ạ
+                  </Text>
+                </View>
+
+                <View style={{ flexDirection: 'row' }}>
+                  <TouchableOpacity style={{ margin: 5, flex: 1 }}>
+                    <Image style={{ width: 75, height: 96 }}
+                      resizeMode="contain"
+                      source={require('./images/ProductsDetail/bag-2.jpg')} />
+                  </TouchableOpacity>
+                  <TouchableOpacity style={{ margin: 5, flex: 1 }}>
+                    <Image style={{ width: 75, height: 96 }}
+                      resizeMode="contain"
+                      source={require('./images/ProductsDetail/bag-2.jpg')} />
+                  </TouchableOpacity>
+                  <TouchableOpacity style={{ margin: 5, flex: 1 }}>
+                    <Image style={{ width: 75, height: 96 }}
+                      resizeMode="contain"
+                      source={require('./images/ProductsDetail/bag-2.jpg')} />
+                  </TouchableOpacity>
+                </View>
+
+                <View>
+                  <Text style={{ color: 'gray', fontSize: 13 }}>2020/07/02 12:42</Text>
+                </View>
+
+                <View style={{ backgroundColor: "#e6e7e8", padding: 5 }}>
+                  <Text style={{ fontSize: 14, color: "red", marginVertical: 5 }}>Phản hồi của người bán</Text>
+                  <Text style={{ fontSize: 13 }}>
+                    Shop cảm ơn bạn nhé!
+                  </Text>
+                </View>
               </View>
-            </KeyboardAvoidingView>
-            <View style={styles.helpContainer}>
-              <Button
-                title={'Need help ?'}
-                titleStyle={{ color: 'white' }}
-                buttonStyle={{ backgroundColor: 'transparent' }}
-                underlayColor="transparent"
-                onPress={() => console.log('Account created')}
-              />
+            </View>
+
+            <View style={{ flexDirection: 'row', paddingVertical: 5, borderBottomColor: "gray", borderBottomWidth: 0.5 }}>
+              <View style={{ marginHorizontal: 10, marginVertical: 5, width: 20, height: 20, borderRadius: 10, backgroundColor: "gray", justifyContent: 'center', alignItems: 'center' }}>
+                <FontAwesome5 name="user-alt" size={10} color="#2f435c" />
+              </View>
+              <View style={{ flex: 1, margin: 5 }}>
+                <View style={{ flexDirection: 'row', flex: 1, justifyContent: 'space-between' }}>
+                  <View style={{ alignItems: 'center' }}>
+                    <Text style={{ color: "gray" }}>User</Text>
+                  </View>
+                  <View style={{ flexDirection: "row", alignSelf: 'flex-end', width: 40, justifyContent: "space-between" }}>
+                    <AntDesign name="like1" size={16} color="gray" />
+                    <Entypo name="dots-three-horizontal" size={16} color="gray" />
+                  </View>
+                </View>
+                <View style={{ flexDirection: 'row', margin: 5 }}>
+                  <FontAwesome name="star" size={10} color="#FFAA43" />
+                  <FontAwesome name="star" size={10} color="#FFAA43" />
+                  <FontAwesome name="star" size={10} color="#FFAA43" />
+                  <FontAwesome name="star-half-empty" size={10} color="#FFAA43" />
+                  <FontAwesome name="star-o" size={10} color="#FFAA43" />
+                </View>
+                <View style={{ margin: 5 }}>
+                  <Text>
+                    E chào cô. Do một số lý do gì đó mà tài khoản của e không được quét nộp tiền học. Cô cho e hỏi giờ e làm sao ạ. Vì mai e thi mà kiểm tra thấy tài khoản vẫn còn tiền ạ
+                  </Text>
+                </View>
+
+                <View style={{ flexDirection: 'row' }}>
+                  <TouchableOpacity style={{ margin: 5, flex: 1 }}>
+                    <Image style={{ width: 75, height: 96 }}
+                      resizeMode="contain"
+                      source={require('./images/ProductsDetail/bag-2.jpg')} />
+                  </TouchableOpacity>
+                  <TouchableOpacity style={{ margin: 5, flex: 1 }}>
+                    <Image style={{ width: 75, height: 96 }}
+                      resizeMode="contain"
+                      source={require('./images/ProductsDetail/bag-2.jpg')} />
+                  </TouchableOpacity>
+                  <TouchableOpacity style={{ margin: 5, flex: 1 }}>
+                    <Image style={{ width: 75, height: 96 }}
+                      resizeMode="contain"
+                      source={require('./images/ProductsDetail/bag-2.jpg')} />
+                  </TouchableOpacity>
+                </View>
+
+                <View>
+                  <Text style={{ color: 'gray', fontSize: 13 }}>2020/07/02 12:42</Text>
+                </View>
+
+                <View style={{ backgroundColor: "#e6e7e8", padding: 5 }}>
+                  <Text style={{ fontSize: 14, color: "red", marginVertical: 5 }}>Phản hồi của người bán</Text>
+                  <Text style={{ fontSize: 13 }}>
+                    Shop cảm ơn bạn nhé!
+                  </Text>
+                </View>
+              </View>
+            </View>
+
+            <View style={{ flexDirection: 'row', paddingVertical: 5, borderBottomColor: "gray", borderBottomWidth: 0.5 }}>
+              <View style={{ marginHorizontal: 10, marginVertical: 5, width: 20, height: 20, borderRadius: 10, backgroundColor: "gray", justifyContent: 'center', alignItems: 'center' }}>
+                <FontAwesome5 name="user-alt" size={10} color="#2f435c" />
+              </View>
+              <View style={{ flex: 1, margin: 5 }}>
+                <View style={{ flexDirection: 'row', flex: 1, justifyContent: 'space-between' }}>
+                  <View style={{ alignItems: 'center' }}>
+                    <Text style={{ color: "gray" }}>User</Text>
+                  </View>
+                  <View style={{ flexDirection: "row", alignSelf: 'flex-end', width: 40, justifyContent: "space-between" }}>
+                    <AntDesign name="like1" size={16} color="gray" />
+                    <Entypo name="dots-three-horizontal" size={16} color="gray" />
+                  </View>
+                </View>
+                <View style={{ flexDirection: 'row', margin: 5 }}>
+                  <FontAwesome name="star" size={10} color="#FFAA43" />
+                  <FontAwesome name="star" size={10} color="#FFAA43" />
+                  <FontAwesome name="star" size={10} color="#FFAA43" />
+                  <FontAwesome name="star-half-empty" size={10} color="#FFAA43" />
+                  <FontAwesome name="star-o" size={10} color="#FFAA43" />
+                </View>
+                <View style={{ margin: 5 }}>
+                  <Text>
+                    E chào cô. Do một số lý do gì đó mà tài khoản của e không được quét nộp tiền học. Cô cho e hỏi giờ e làm sao ạ. Vì mai e thi mà kiểm tra thấy tài khoản vẫn còn tiền ạ
+                  </Text>
+                </View>
+
+                <View style={{ flexDirection: 'row' }}>
+                  <TouchableOpacity style={{ margin: 5, flex: 1 }}>
+                    <Image style={{ width: 75, height: 96 }}
+                      resizeMode="contain"
+                      source={require('./images/ProductsDetail/bag-2.jpg')} />
+                  </TouchableOpacity>
+                  <TouchableOpacity style={{ margin: 5, flex: 1 }}>
+                    <Image style={{ width: 75, height: 96 }}
+                      resizeMode="contain"
+                      source={require('./images/ProductsDetail/bag-2.jpg')} />
+                  </TouchableOpacity>
+                  <TouchableOpacity style={{ margin: 5, flex: 1 }}>
+                    <Image style={{ width: 75, height: 96 }}
+                      resizeMode="contain"
+                      source={require('./images/ProductsDetail/bag-2.jpg')} />
+                  </TouchableOpacity>
+                </View>
+
+                <View>
+                  <Text style={{ color: 'gray', fontSize: 13 }}>2020/07/02 12:42</Text>
+                </View>
+
+                <View style={{ backgroundColor: "#e6e7e8", padding: 5 }}>
+                  <Text style={{ fontSize: 14, color: "red", marginVertical: 5 }}>Phản hồi của người bán</Text>
+                  <Text style={{ fontSize: 13 }}>
+                    Shop cảm ơn bạn nhé!
+                  </Text>
+                </View>
+              </View>
+            </View>
+
+            <View style={{ flexDirection: 'row', paddingVertical: 5, borderBottomColor: "gray", borderBottomWidth: 0.5 }}>
+              <View style={{ marginHorizontal: 10, marginVertical: 5, width: 20, height: 20, borderRadius: 10, backgroundColor: "gray", justifyContent: 'center', alignItems: 'center' }}>
+                <FontAwesome5 name="user-alt" size={10} color="#2f435c" />
+              </View>
+              <View style={{ flex: 1, margin: 5 }}>
+                <View style={{ flexDirection: 'row', flex: 1, justifyContent: 'space-between' }}>
+                  <View style={{ alignItems: 'center' }}>
+                    <Text style={{ color: "gray" }}>User</Text>
+                  </View>
+                  <View style={{ flexDirection: "row", alignSelf: 'flex-end', width: 40, justifyContent: "space-between" }}>
+                    <AntDesign name="like1" size={16} color="gray" />
+                    <Entypo name="dots-three-horizontal" size={16} color="gray" />
+                  </View>
+                </View>
+                <View style={{ flexDirection: 'row', margin: 5 }}>
+                  <FontAwesome name="star" size={10} color="#FFAA43" />
+                  <FontAwesome name="star" size={10} color="#FFAA43" />
+                  <FontAwesome name="star" size={10} color="#FFAA43" />
+                  <FontAwesome name="star-half-empty" size={10} color="#FFAA43" />
+                  <FontAwesome name="star-o" size={10} color="#FFAA43" />
+                </View>
+                <View style={{ margin: 5 }}>
+                  <Text>
+                    E chào cô. Do một số lý do gì đó mà tài khoản của e không được quét nộp tiền học. Cô cho e hỏi giờ e làm sao ạ. Vì mai e thi mà kiểm tra thấy tài khoản vẫn còn tiền ạ
+                  </Text>
+                </View>
+
+                <View style={{ flexDirection: 'row' }}>
+                  <TouchableOpacity style={{ margin: 5, flex: 1 }}>
+                    <Image style={{ width: 75, height: 96 }}
+                      resizeMode="contain"
+                      source={require('./images/ProductsDetail/bag-2.jpg')} />
+                  </TouchableOpacity>
+                  <TouchableOpacity style={{ margin: 5, flex: 1 }}>
+                    <Image style={{ width: 75, height: 96 }}
+                      resizeMode="contain"
+                      source={require('./images/ProductsDetail/bag-2.jpg')} />
+                  </TouchableOpacity>
+                  <TouchableOpacity style={{ margin: 5, flex: 1 }}>
+                    <Image style={{ width: 75, height: 96 }}
+                      resizeMode="contain"
+                      source={require('./images/ProductsDetail/bag-2.jpg')} />
+                  </TouchableOpacity>
+                </View>
+
+                <View>
+                  <Text style={{ color: 'gray', fontSize: 13 }}>2020/07/02 12:42</Text>
+                </View>
+
+                <View style={{ backgroundColor: "#e6e7e8", padding: 5 }}>
+                  <Text style={{ fontSize: 14, color: "red", marginVertical: 5 }}>Phản hồi của người bán</Text>
+                  <Text style={{ fontSize: 13 }}>
+                    Shop cảm ơn bạn nhé!
+                  </Text>
+                </View>
+              </View>
+            </View>
+
+            <View style={{ marginVertical: 5 }}>
+              <TouchableOpacity style={{ alignItems: "center" }}>
+                <Text style={{ fontSize: 14, color: 'red' }}>Xem Tất Cả (851)</Text>
+              </TouchableOpacity>
             </View>
           </View>
-        </ImageBackground>
-      </View>
-    );
+
+
+          <View>
+            <View style={{flexDirection:"row"}}>
+              <Text style={{ fontWeight: '500', flex:1, fontSize:14 }}>Sản phẩm tương tự</Text>
+              <TouchableOpacity style={{ width: 100 }}>
+                <Text style={{fontSize:14, color:'red', paddingBottom:3}}>Xem tất cả <AntDesign name="right" size={14} color="red" /></Text>
+              </TouchableOpacity>
+            </View>
+
+            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+              <TouchableOpacity style={{ margin: 5, flex: 1, width: 75 }}>
+                <Image style={{ width: 75, height: 96 }}
+                  resizeMode="contain"
+                  source={require('./images/ProductsDetail/bag-1.jpg')} />
+                <View>
+                  <Text numberOfLines={2} style={{ fontSize: 12 }}>[Mã WAXANH22 giảm 15% đơn hàng 150k] Quần xinh đẹp</Text>
+                  <View style={{ flexDirection: 'row' }}>
+                    <Text style={{ color: "red", fontSize: 12 }}>60.000₫</Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity style={{ margin: 5, flex: 1, width: 75 }}>
+                <Image style={{ width: 75, height: 96 }}
+                  resizeMode="contain"
+                  source={require('./images/ProductsDetail/bag-2.jpg')} />
+                <View>
+                  <Text numberOfLines={2} style={{ fontSize: 12 }}>[Mã WAXANH22 giảm 15% đơn hàng 150k] Quần xinh đẹp</Text>
+                  <View style={{ flexDirection: 'row' }}>
+                    <Text style={{ color: "red", fontSize: 12 }}>60.000₫</Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity style={{ margin: 5, flex: 1, width: 75 }}>
+                <Image style={{ width: 75, height: 96 }}
+                  resizeMode="contain"
+                  source={require('./images/ProductsDetail/bag-3.jpg')} />
+                <View>
+                  <Text numberOfLines={2} style={{ fontSize: 12 }}>[Mã WAXANH22 giảm 15% đơn hàng 150k] Quần xinh đẹp</Text>
+                  <View style={{ flexDirection: 'row' }}>
+                    <Text style={{ color: "red", fontSize: 12 }}>60.000₫</Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity style={{ margin: 5, flex: 1, width: 75 }}>
+                <Image style={{ width: 75, height: 96 }}
+                  resizeMode="contain"
+                  source={require('./images/ProductsDetail/bag-4.jpg')} />
+                <View>
+                  <Text numberOfLines={2} style={{ fontSize: 12 }}>[Mã WAXANH22 giảm 15% đơn hàng 150k] Quần xinh đẹp</Text>
+                  <View style={{ flexDirection: 'row' }}>
+                    <Text style={{ color: "red", fontSize: 12 }}>60.000₫</Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity style={{ margin: 5, flex: 1, width: 75 }}>
+                <Image style={{ width: 75, height: 96 }}
+                  resizeMode="contain"
+                  source={require('./images/ProductsDetail/bag-1.jpg')} />
+                <View>
+                  <Text numberOfLines={2} style={{ fontSize: 12 }}>[Mã WAXANH22 giảm 15% đơn hàng 150k] Quần xinh đẹp</Text>
+                  <View style={{ flexDirection: 'row' }}>
+                    <Text style={{ color: "red", fontSize: 12 }}>60.000₫</Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity style={{ margin: 5, flex: 1, width: 75 }}>
+                <Image style={{ width: 75, height: 96 }}
+                  resizeMode="contain"
+                  source={require('./images/ProductsDetail/bag-2.jpg')} />
+                <View>
+                  <Text numberOfLines={2} style={{ fontSize: 12 }}>[Mã WAXANH22 giảm 15% đơn hàng 150k] Quần xinh đẹp</Text>
+                  <View style={{ flexDirection: 'row' }}>
+                    <Text style={{ color: "red", fontSize: 12 }}>60.000₫</Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
+            </ScrollView>
+          </View>
+
+        </ScrollView>
+      </SafeAreaView>
+    )
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  rowSelector: {
-    height: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  selectorContainer: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  selected: {
-    position: 'absolute',
-    borderRadius: 50,
-    height: 0,
-    width: 0,
-    top: -5,
-    borderRightWidth: 70,
-    borderBottomWidth: 70,
-    borderColor: 'white',
-    backgroundColor: 'white',
-  },
-  loginContainer: {
+    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  loginTextButton: {
-    fontSize: 16,
-    color: 'white',
-    fontWeight: 'bold',
-  },
-  loginButton: {
-    backgroundColor: '#171f8f',
-    borderRadius: 10,
-    height: 50,
+  circleHolder: {
+    position: "absolute",
+    top: 3,
     width: 200,
-  },
-  titleContainer: {
-    height: 150,
-    backgroundColor: 'transparent',
+    height: 200,
     justifyContent: 'center',
+    alignItems: 'center'
   },
-  formContainer: {
+  circle: {
     backgroundColor: 'white',
-    width: SCREEN_WIDTH - 30,
-    borderRadius: 10,
-    paddingTop: 32,
-    paddingBottom: 32,
-    alignItems: 'center',
-  },
-  loginText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: 'white',
-  },
-  bgImage: {
-    flex: 1,
-    top: 0,
-    left: 0,
-    width: SCREEN_WIDTH,
-    height: SCREEN_HEIGHT,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  categoryText: {
-    textAlign: 'center',
-    color: 'white',
-    fontSize: 24,
-    backgroundColor: 'transparent',
-    opacity: 0.54,
-  },
-  selectedCategoryText: {
-    opacity: 1,
-  },
-  titleText: {
-    color: 'white',
-    fontSize: 30,
-  },
-  helpContainer: {
-    height: 64,
-    alignItems: 'center',
-    justifyContent: 'center',
+    width: 150,
+    height: 150,
+    borderRadius: 75,
+    borderWidth: 2
   },
 });

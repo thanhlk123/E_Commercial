@@ -17,7 +17,7 @@ class HomeScreen extends Component {
   }
   static ShopScreenOptions = () => {
     let headerTitleAlign = 'center'
-    let headerStyle ={height:70,backgroundColor: '#3b5f8a', opacity:1}
+    let headerStyle ={backgroundColor: '#3b5f8a', opacity:1}
     let headerTintColor = 'white'
     let headerRight =()=> (<FontAwesome style={{marginRight:15}} name='search' color='white' size={18}  />)
     return {headerTitleAlign, headerStyle, headerRight, headerTintColor}

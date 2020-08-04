@@ -14,8 +14,7 @@ const Tab = createBottomTabNavigator();
 
 function MyTabs() {
   return (
-    <Tab.Navigator
-    >
+    <Tab.Navigator>
       <Tab.Screen
         options={{
           tabBarLabel: 'Home',

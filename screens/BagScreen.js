@@ -17,14 +17,14 @@ class CategoriesScreen extends Component {
   CategoriesMainOptions = () => {
     let headerTitleAlign = 'center'
     let headerTitle = 'Categories'
-    let headerStyle = { height: 70, backgroundColor: '#76a6d6', opacity: 1 }
+    let headerStyle = {backgroundColor: '#3b5f8a', opacity: 1 }
     let headerTintColor = 'white'
     let headerRight = () => (<FontAwesome style={{ marginRight: 15 }} name='search' color='white' size={18} />)
     return { headerTitleAlign, headerStyle, headerRight, headerTintColor, headerTitle }
   }
   ListCategoriesOptions = () => {
     let headerTitleAlign = 'center'
-    let headerStyle = { height: 85, backgroundColor: '#76a6d6', opacity: 1 }
+    let headerStyle = {backgroundColor: '#3b5f8a', opacity: 1 }
     let headerTintColor = 'white'
     let headerBackTitleVisible = true
     let headerLeft = () => (

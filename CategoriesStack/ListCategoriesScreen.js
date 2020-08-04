@@ -35,6 +35,7 @@ const GoodsItem = (item) => {
         <View>
             <TouchableOpacity
                 style={styles.buttonItem}
+                onPress = {()=>item.navigation.navigate('ProductDetails')}
             >
                 <Image
                     source={item.img}
@@ -138,6 +139,7 @@ export default class GoodsScreen extends Component {
                         data={this.state.goodsItemData}
                         renderItem={({ item }) => <GoodsItem img={item.img}
                             name={item.name}
+                            navigation={this.props.navigation}
                             price={item.price}
                             cost={item.cost}
                             isDiscount={item.isDiscount} />}
