@@ -9,97 +9,8 @@ import {
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { FontAwesome, AntDesign } from "@expo/vector-icons";
-
-const RenderItemChoosed = (props) => {
-  return (
-    <View style={[styles.containerItem, styles.shadowBox]}>
-      <View
-        style={{
-          flex: 0.35,
-          justifyContent: "center",
-          alignItems: "flex-start",
-        }}
-      >
-        <Image
-          source={require("../images/goodsItemData/item2.jpg")}
-          style={{ height: 127, width: 100 }}
-          resizeMode="cover"
-        />
-      </View>
-      <View
-        style={{
-          flex: 0.65,
-          marginLeft: 10,
-          marginRight: 5,
-          marginTop: 10,
-          alignItems: "center",
-        }}
-      >
-        <View
-          style={{
-            flex: 0.7,
-          }}
-        >
-          <Text
-            style={{
-              fontSize: 18,
-            }}
-          >
-            {props.itemName}
-          </Text>
-          <Text
-            style={{
-              fontWeight: "bold",
-              color: "grey",
-              fontSize: 15,
-              marginTop: 5,
-            }}
-          >
-            {props.itemPrice}
-          </Text>
-        </View>
-        <View
-          style={{
-            flex: 0.35,
-            justifyContent: "space-around",
-            alignItems: "center",
-            flexDirection: "row",
-            width: 110,
-          }}
-        >
-          <TouchableOpacity
-            style={{ height: 20, width: 20, borderRadius: 10 }}
-            onPress={() => {
-              props.MinusItem(props.itemTotal);
-            }}
-          >
-            <AntDesign name="minuscircleo" size={18} color="blue" />
-          </TouchableOpacity>
-
-          <Text
-            style={{
-              height: 30,
-              width: 40,
-              borderColor: "gray",
-              borderWidth: 1,
-              textAlign: "center",
-              textAlignVertical: "center",
-            }}
-            size={20}
-          >
-            {props.itemTotal}
-          </Text>
-          <TouchableOpacity
-            style={{ height: 20, width: 20, borderRadius: 10 }}
-            onPress={() => props.PlusItem(props.itemTotal)}
-          >
-            <AntDesign name="pluscircleo" size={18} color="blue" />
-          </TouchableOpacity>
-        </View>
-      </View>
-    </View>
-  );
-};
+import RenderItemChoosed from './Component/RenderItemChoosed'
+import MyBagContainer from './container/myBagContainer'
 
 export default class MyBagHomeScreen extends Component {
   constructor(props) {
@@ -168,21 +79,9 @@ export default class MyBagHomeScreen extends Component {
               TOTAL: {this.state.priceTotal}
             </Text>
           </View>
+         {/* task list data choose */}
+          <MyBagContainer/>
 
-          <RenderItemChoosed
-            itemTotal={this.state.itemTotal}
-            itemName="Đầm Belted Hoa Nhiều màu Boho"
-            itemPrice="418.000"
-            MinusItem={this._MinusItem}
-            PlusItem={this._PlusItem}
-          />
-          <RenderItemChoosed
-            itemTotal={this.state.itemTotal}
-            itemName="Đầm Belted Hoa Nhiều màu Boho"
-            itemPrice="418.000"
-            MinusItem={this._MinusItem}
-            PlusItem={this._PlusItem}
-          />
         </View>
         <View>
           <View style={styles.headerContent}>

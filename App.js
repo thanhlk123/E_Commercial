@@ -10,7 +10,32 @@ import ProfileScreen from './screens/ProfileScreen'
 import NotificationsScreen from './screens/NotificationsScreen'
 import BagScreen from './screens/BagScreen'
 
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+
 const Tab = createBottomTabNavigator();
+
+const numberReducer = (state = { number: 1 }, action) => {
+
+  switch(action.type) {
+    case 'ADD_NUMBER':
+      return { number : state.number + 1 }
+
+    case 'SUB_NUMBER':
+      return { number : state.number - 1 }
+  }
+
+  return state;
+}
+
+
+let store = createStore(
+  combineReducers({ 
+    number: numberReducer,
+  })
+ )
+
+ store.subscribe(() => console.log(store.getState()))
 
 function MyTabs() {
   return (
@@ -61,8 +86,10 @@ function MyTabs() {
 export default function App() {
   return (
     <NavigationContainer>
+      <Provider store={ store }>
       <StatusBar backgroundColor="#3b5f8a" barStyle="dark-content" />
       <MyTabs />
+      </Provider>
     </NavigationContainer>
   );
 }
